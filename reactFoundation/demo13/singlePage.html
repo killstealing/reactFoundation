@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.min.js"></script>
+    <script src="ReactRouter.min.js"></script>
+    <style type="text/css">
+        body{
+            background-color: #FFCC00;
+            padding: 0;
+            margin: 0;
+        }
+        #container{
+            padding:10px;
+        }
+        ul{
+            background-color: black;
+            padding: 0;
+        }
+        ul li {
+            display: inline;
+        }
+        ul li a{
+            padding:20px;
+            display: inline-block;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .active{
+            background-color: #0099FF;
+            color: #fff;
+            font-weight: bold;
+        }
+        .content{
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var {
+            Router,
+            Route,
+            IndexRoute,
+            IndexLink,
+            Link,
+            hashHistory
+        }=ReactRouter;
+        var destination=document.querySelector("#container");
+        var Home=React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <h2>望天门山</h2>
+                        <p>天门中断楚江开，碧水东流至此回</p>
+                        <p>两岸青山相对出，孤帆一片日边来</p>
+                    </div>
+                );
+            }
+        });
+        var Dufu=React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <h2>望天门山 杜甫</h2>
+                        <p>杜甫 天门中断楚江开，碧水东流至此回</p>
+                        <p>杜甫 两岸青山相对出，孤帆一片日边来</p>
+                    </div>
+                );
+            }
+        });
+        var LiShangYin=React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <h2>望天门山 李商隐</h2>
+                        <p>李商隐 天门中断楚江开，碧水东流至此回</p>
+                        <p>李商隐 两岸青山相对出，孤帆一片日边来</p>
+                    </div>
+                );
+            }
+        });
+        var SinglePage=React.createClass({
+            getInitialState:function(){
+                return {
+                    menu:[{
+                        title:'李白',
+                        contentTitle:'望天门山 李白',
+                        content:'李白 天门中断楚江开，碧水东流至此回 \r\n 两岸青山相对出，孤帆一片日边来'
+                    },{
+                        title:'杜甫',
+                        contentTitle:'望天门山 杜甫',
+                        content:'杜甫 天门中断楚江开，碧水东流至此回 \r\n 两岸青山相对出，孤帆一片日边来'
+                    },{
+                        title:'李商隐',
+                        contentTitle:'望天门山 李商隐',
+                        content:'李商隐 天门中断楚江开，碧水东流至此回 \r\n 两岸青山相对出，孤帆一片日边来'
+                    }],
+                    activeMenu:{
+                        contentTitle:'望天门山 李白',
+                        content:'李白 天门中断楚江开，碧水东流至此回 \r\n 两岸青山相对出，孤帆一片日边来'
+                    }
+                };
+            },
+            selectMenu:function(){
+                this.setState({
+                    activeMenu:this.state.menu[this.refs._li.index]
+                });
+            },
+            render:function(){
+                return (
+                    <div className="mainDiv">
+                        <h1>Simple SPA</h1>
+                        <ul>
+                            <li>
+                                <IndexLink activeClassName="active" to="/">李白</IndexLink>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/df">杜甫</Link>
+                            </li>
+                            <li>
+                                <Link activeClassName="active" to="/lsy">李商隐</Link>
+                            </li>
+                        </ul>
+                        <div className="content">
+                            {this.props.children}
+                        </div>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <Router history={hashHistory}>
+                <Route path="/" component={SinglePage}>
+                    <IndexRoute component={Home}/>
+                    <Route path="df" component={Dufu} />
+                    <Route path="lsy" component={LiShangYin} />
+                </Route>
+            </Router>
+            ,
+            destination
+        );
+    </script>
+</body>
+</html>

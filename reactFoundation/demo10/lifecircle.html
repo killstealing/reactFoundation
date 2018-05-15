@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.min.js"></script>
+    <style type="text/css">
+        #container{
+            padding:50px;
+            background-color: #FFF;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var destination=document.querySelector("#container");
+        var PlusButton=React.createClass({
+            render:function(){
+                return (
+                    <button style={this.props.buttonStyle}
+                     onClick={this.props.clickHandler}>+</button>
+                );
+            }
+        });
+        var Counter=React.createClass({
+            render:function(){
+                var textStyle={
+                    fontSize:72,
+                    fontFamily:"sans-serif",
+                    color:"#333",
+                    fontWeight:"bold"
+                };
+                return (
+                    <div style={textStyle}>{this.props.count}</div>
+                );
+            }
+        });
+        var CounterParent=React.createClass({
+            getInitialState:function(){
+                return {count:0};
+            },
+            increase:function(e){
+                console.log(this);
+                var currentCount=this.state.count;
+                if(e.shiftKey==true){
+                    currentCount+=10;
+                }else{
+                    currentCount+=1;
+                }
+                this.setState({
+                    count:currentCount
+                });
+            },
+            render:function(){
+                var counterStyle={
+                    padding:20,
+                    textAlign:"center"
+                };
+                var buttonStyle={
+                    fontSize:"1em",
+                    width:30,
+                    height:30,
+                    fontFamily:"sans-serif",
+                    color:"#333",
+                    fontWeight:"bold",
+                    lineWeight:"3px"
+                };
+                return (
+                    <div>
+                        <Counter count={this.state.count}/>
+                        <PlusButton buttonStyle={buttonStyle} clickHandler={this.increase}>+</PlusButton>
+                    </div>
+                );
+            }
+        });
+        var divStyle={
+            padding:40,
+            width:250,
+            backgroundColor:"#999",
+            borderRadius:10,
+            textAlign:"center"
+        };
+        ReactDOM.render(
+            <div style={divStyle}> 
+                <CounterParent/>
+            </div>,
+            destination
+        );
+    </script>
+</body>
+</html>

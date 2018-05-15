@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var destination=document.querySelector("#container");
+        var Counter=React.createClass({
+            getInitialState:function(){
+                return {
+                    strikes:0
+                }
+            },
+            timerTick:function(){
+                this.setState({
+                    strikes:this.state.strikes+100
+                });
+            },
+            componentDidMount() {
+                setInterval(this.timerTick,1000);
+            },
+            render:function(){
+                var _style={
+                    color:"#66FFFF",
+                    fontSize:50
+                };
+                return (
+                    <h1 style={_style}>{this.state.strikes}</h1>
+                );
+            }
+        });
+        var LightingCounterDisplay=React.createClass({
+            render:function() {
+                var counterDisplayStyle={
+                    width:200,
+                    borderRadius:5,
+                    backgroundColor:"black",
+                    padding:30,
+                    color:"#999",
+                    textAlign:"center"
+                };
+                var commonStyle={
+                        margin:0,
+                        padding:0
+                    };
+                var textStyle={
+                    emphasis:{
+                        fontSize:38,
+                        ...commonStyle
+                    },
+                    smallEmphasis:{
+                        ...commonStyle
+                    },
+                    small:{
+                        fontSize:17,
+                        opacity:0.5,
+                        ...commonStyle
+                    }
+                };
+                return (
+                    <div style={counterDisplayStyle}>
+                        <Counter/>
+                        <h2 style={textStyle.smallEmphasis}>雷霆打击</h2>
+                        <h2 style={textStyle.emphasis}>我们的地球</h2>
+                        <p style={textStyle.small}>自从你加载这个组件之后</p>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <div> 
+                <LightingCounterDisplay/>
+            </div>,
+            destination
+        );
+    </script>
+</body>
+</html>

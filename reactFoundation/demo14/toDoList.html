@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.min.js"></script>
+    <script src="ReactRouter.min.js"></script>
+    <style type="text/css">
+        body{
+            background-color: #26B6B6;
+        }
+        .mainDiv{
+            margin:50px;
+            padding:50px;
+        }
+        .inputDiv input{
+            height: 30px;
+            border:2px solid #8820E9;
+        }
+        .inputDiv button{
+            height: 34px;
+            background-color:blue;
+            color:#fff;
+            margin-left:10px;
+        }
+        ul{
+            margin: 0;
+            padding:0;
+        }
+        ul li{
+            list-style: none;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding:10px;
+            margin:10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var destination=document.querySelector("#container");
+        var Li=React.createClass({
+            render:function(){
+                var item=this.props.item;
+                return (
+                    <li key={item.key}>{item.text}</li>
+                );
+            }
+        });
+        var Input=React.createClass({
+            getInitialState:function(){
+                return {
+                    items:[]
+                }
+            },
+            add:function(){
+                var itemArray=this.state.items;
+                itemArray.push({
+                    text:this._input.value,
+                    key:Date.now()
+                });
+                this.setState({
+                    items:itemArray
+                });
+            },
+            render:function(){
+                var self=this;
+                var liList=[];
+                for(var i=0;i<this.state.items.length;i++){
+                    liList.push(<Li item={this.state.items[i]}/>);
+                }
+                return (
+                    <div className="mainDiv">
+                        <div className="inputDiv">
+                            <input type="text" placeholder="请输入一个任务" ref={
+                                function(el){
+                                    self._input=el;
+                                }
+                            }/>
+                            <button onClick={this.add}>添加</button>    
+                        </div>
+                        <div>
+                            <ul>
+                                {liList}
+                            </ul>    
+                        </div>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <div>
+                <Input/>
+            </div>
+            ,
+            destination
+        );
+    </script>
+</body>
+</html>
