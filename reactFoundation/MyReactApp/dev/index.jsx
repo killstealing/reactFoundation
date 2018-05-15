@@ -13,9 +13,9 @@ class HelloWorld extends React.Component{
 
 ReactDOM.render(
     <div>
-        <HelloWorld showContent="IronMan"/>
-        <HelloWorld showContent="SuperMan"/>
-        <HelloWorld showContent="BatMan"/>
+        <HelloWorld showContent="IronMan1111"/>
+        <HelloWorld showContent="SuperMan1111"/>
+        <HelloWorld showContent="BatMan111s"/>
     </div>,
     document.querySelector("#container")
 );
