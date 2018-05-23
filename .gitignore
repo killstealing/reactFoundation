@@ -5,3 +5,5 @@
 org.eclipse.*.xml
 
 reactFoundation/MyReactApp/node_modules/
+reactFoundation/demo1/node_modules/
+
