@@ -1,0 +1,28 @@
+.mobileNewsList{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+.mobileNewsList img{
+    width: 150px;
+    height: 100px;
+}
+.mobileNewListItem{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mobileNewListItem p{
+    margin: 0;
+}
+
+.mobileNewListItem p:nth-of-type(1){
+    background-color: #ccc;
+    color: red;
+    display: inline-block;
+}
+.mobileNewListItem p:nth-of-type(2){
+    display: inline-block;
+    margin-left: 10px;
+}
