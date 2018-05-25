@@ -4,7 +4,7 @@ import {
     Card
 } from 'antd';
 import './../css/mobile_list.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {  Link } from 'react-router';
 const TabPane = Tabs.TabPane;
 
 export default class MobileList extends Component {
@@ -25,7 +25,7 @@ export default class MobileList extends Component {
         const newsList = news.length ?
             news.map((newsItem, index) => (
                 <li key={index}>
-                    <Link to={`details/${newsItem.uniquekey}`} target="_blank">
+                    <Link to={`details/${newsItem.uniquekey}`}>
                         <div className="mobileNewsList">
                             <img src={newsItem.thumbnail_pic_s} alt="" />
                             <div className="mobileNewListItem">

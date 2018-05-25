@@ -3,7 +3,7 @@ import {
     Row, Col, Input, Button, Checkbox, Form, Modal, Tabs, Menu, Icon, Carousel,
     Card
 } from 'antd';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router';
 const TabPane = Tabs.TabPane;
 
 export default class PCNewsImageBlock extends Component {
@@ -35,7 +35,7 @@ export default class PCNewsImageBlock extends Component {
         const newsList = news.length ?
             news.map((newsItem, index) => (
                     <div key={index} className="imageblock">
-                        <Link to={`details/${newsItem.uniquekey}`} target="_blank">
+                        <Link to={`details/${newsItem.uniquekey}`}>
                             <div className="custom-image">
                                 <img alt="" style={styleImage} src={newsItem.thumbnail_pic_s}/>
                             </div>

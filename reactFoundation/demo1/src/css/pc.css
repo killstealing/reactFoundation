@@ -18,6 +18,9 @@ footer{
     height: 50px;
     line-height: 50px;
 }
+footer .ant-col-20{
+    border-top: 1px solid #ccc;
+}
 .pcIndex{
     display: flex;
     flex-direction: column;
@@ -69,3 +72,48 @@ Carousel{
 
 /*image block******END*****/
 
+/* news details page start*/
+/* pc start*/
+.main .articleContainer{
+    padding: 10px;
+}
+.main .article-title{
+    font-size: 15px;
+    font-weight: bold;
+}
+.main .article-src-time{
+    border-bottom: 1px solid #ccc;
+    color: #ccc;
+    padding: 0 0 10px;
+}
+.main .articleContainer .txt{
+    font-size: 17px;
+    padding: 10px 0 0;
+}
+.main .img-wrap{
+    padding-bottom: 0 !important;
+}
+/* pc end*/
+
+/* mobile start*/
+.mobileMain .articleContainer{
+    padding: 10px;
+}
+.mobileMain .article-title{
+    font-size: 15px;
+    font-weight: bold;
+}
+.mobileMain .article-src-time{
+    border-bottom: 1px solid #ccc;
+    color: #ccc;
+    padding: 0 0 10px;
+}
+.mobileMain .articleContainer .txt{
+    font-size: 17px;
+    padding: 10px 0 0;
+}
+.mobileMain .img-wrap{
+    padding-bottom: 0 !important;
+}
+/* mobile end*/
+/* news details page end*/

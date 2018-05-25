@@ -3,7 +3,7 @@ import {
     Row, Col, Input, Button, Checkbox, Form, Modal, Tabs, Menu, Icon, Carousel,
     Card
 } from 'antd';
-import { BrowserRouter as Router, Route, Link,NavLink } from 'react-router-dom';
+import { Link } from 'react-router';
 const TabPane = Tabs.TabPane;
 
 export default class PCNewsBlock extends Component {
@@ -24,9 +24,9 @@ export default class PCNewsBlock extends Component {
         const newsList = news.length ?
             news.map((newsItem, index) => (
                 <li key={index}>
-                    <NavLink to={`/details/${newsItem.uniquekey}`} target="_blank">
+                    <Link to={`details/${newsItem.uniquekey}`}>
                         {newsItem.title}
-                    </NavLink>
+                    </Link>
                 </li>
             ))
             : '没有加载到任何新闻';
