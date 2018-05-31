@@ -1,52 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
 
-function Summary ({sum}){
+function Summary({ value }) {
   return (
     <div>
-      Total count: {sum}
+      Total count: {value}
     </div>
   );
 }
-export default class SummaryContainer extends Component {
-  constructor(){
-    super(...arguments);
 
-    this.state=this.getOwnState();
-    this.getOwnState=this.getOwnState.bind(this);
-    this.onChange=this.onChange.bind(this);
-  }
-  getOwnState(){
-    const counterValues=this.context.store.getState();
-    let sum=0;
-    for(const key in counterValues){
-      if(counterValues.hasOwnProperty(key)){
-        sum+=counterValues[key];
-      }
-    }
-    return {
-      sum:sum
+function mapStateToProps(state, ownProps) {
+  let value = 0;
+  for (const key in state) {
+    if (state.hasOwnProperty(key)) {
+      value += state[key];
     }
   }
-  onChange(){
-    this.setState(this.getOwnState());
-  }
-  componentDidMount = () => {
-    this.context.store.subscribe(this.onChange);
-  }
-  componentWillUnmount = () => {
-    this.context.store.unsubscribe(this.onChange);
-  }
-  shouldComponentUpdate = (nextProps, nextState) => {
-    return nextState.sum!=this.state.sum;
-  }
-  render() {
-    return (
-      <Summary sum={this.state.sum}></Summary>
-    )
-  }
+  return {
+    value: value
+  };
 }
 
-SummaryContainer.contextTypes  ={
-  store:PropTypes.object
-}
+export default connect(mapStateToProps)(Summary)

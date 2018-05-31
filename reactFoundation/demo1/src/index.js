@@ -5,14 +5,14 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './css/pc.css';
 import './css/mobile.css';
-import CounterPanel from './react_redux/views/CounterPanel';
-import Provider from './react_redux/Provider';
-import store from './react_redux/Store';
+import TodoApp from './todos';
+import { Provider } from 'react-redux';
+import store from './todos/Store';
 
 
 ReactDOM.render(
     <Provider store={store}>
-        <CounterPanel></CounterPanel>
+        <TodoApp />
     </Provider>
     , document.getElementById('root'));
 registerServiceWorker();
