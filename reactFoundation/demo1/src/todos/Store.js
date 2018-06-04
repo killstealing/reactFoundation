@@ -21,4 +21,8 @@ const storeEnhancers = compose(
   (win && win.devToolsExtension) ? win.devToolsExtension() : (f) => f,
 );
 
-export default createStore(reducer, {}, storeEnhancers);
+export default createStore(reducer, {
+  TodosReducer:[{"id":1,"text":"111","completed":false},
+  {"id":2,"text":"111","completed":false},
+  {"id":3,"text":"111","completed":false}]
+}, storeEnhancers);

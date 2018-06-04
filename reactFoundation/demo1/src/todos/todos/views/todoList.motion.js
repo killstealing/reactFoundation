@@ -7,24 +7,54 @@ import TodoItem from './todoItem.1';
 import { createSelector } from 'reselect';
 import TransitionGroup from 'react-addons-css-transition-group';
 import './todoItem.css';
+import {spring,TransitionMotion} from 'react-motion';
+
+const willLeave=()=>{
+    return {
+        height:spring(0),
+        opacity:spring(0)
+    }
+}
+const willEnter=()=>{
+    return {
+        height:0,
+        opacity:0
+    }
+}
+const getStyles=(todos)=>{
+    return todos.map(item=>{
+        return {
+            key:item.id.toString(),
+            data:item,
+            style:{
+                height:spring(60),
+                opacity:spring(1)
+            }
+        }
+    });
+}
 
 const TodoList = ({ todos }) => {
     console.log('todolist ' + JSON.stringify(todos));
+    const styles=getStyles(todos);
     return (
-        <ul>
-            <TransitionGroup transitionName="fade" transitionEnterTimeout={1000}
-                transitionLeaveTimeout={2000} transitionAppear={true}
-                transitionAppearTimeout={2000}>
+            <TransitionMotion willLeave={willLeave} willEnter={willEnter} styles={styles}>
             {
-                todos.map((item) => {
-                    return (
-                        <TodoItem key={item.id} text={item.text} completed={item.completed}
-                            id={item.id}></TodoItem>
-                    );
-                })
+                interpolatedStyles=>
+                <ul>
+                    {
+                        interpolatedStyles.map(config=>{
+                            const {data,style,key}=config;
+                            const item=data;
+                            return (
+                                <TodoItem style={style} key={item.id} text={item.text} completed={item.completed}
+                                    id={item.id}></TodoItem>
+                            );
+                        })
+                    }
+                </ul>
             }
-            </TransitionGroup>
-        </ul>
+            </TransitionMotion>
     );
 }
 

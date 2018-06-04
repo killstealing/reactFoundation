@@ -3,34 +3,51 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import * as Actions from './../Actions';
 
-const TodoItem = ({ id,onToggle, onRemove, completed, text }) => {
-    console.log('todoitem '+id+completed+text);
-    const checkedProp = completed ? { checked: true } : {};
-    return (
-        <li className="todo-item" style={{ textDecoration: completed ? 'line-through' : 'none' }}>
-            <input className="toggle" type="checkbox" {...checkedProp} readOnly 
-                onClick={()=>onToggle(id)} />
-            <label>{text}</label>
-            <button onClick={()=>onRemove(id)}>X</button>
+
+
+class TodoItem extends React.Component {
+    constructor() {
+      super(...arguments);
+  
+      console.log('enter TodoItem constructor: ' + this.props.text);
+    }
+  
+    render() {
+      const {style, onToggle, onRemove, completed, text } = this.props;
+  
+      console.log('enter TodoItem render: ' + text);
+  
+      return (
+        <li className="todo-item"
+          style={{
+            ...style,
+            textDecoration: completed ? 'line-through' : 'none'
+          }}
+        >
+          <input className="toggle" type="checkbox" checked={completed ? "checked" : ""} readOnly onClick={onToggle} />
+          <label className="text">{text}</label>
+          <button className="remove" onClick={onRemove}>×</button>
         </li>
-    );
-}
-
-TodoItem.propTypes = {
-    id:PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired
-};
-
-const mapDispatchToProps=(dispatch,ownProps)=>{
-    return {
-        onToggle:(id)=>{
-            dispatch(Actions.toggleAction(id));
-        },
-        onRemove:(id)=>{
-            dispatch(Actions.delAction(id));
-        }
+      );
     };
-}
-
-export default connect(null, mapDispatchToProps)(TodoItem)
+  }
+  
+  TodoItem.propTypes = {
+    onToggle: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
+    completed: PropTypes.bool.isRequired,
+    style: PropTypes.object.isRequired,
+    text: PropTypes.string.isRequired
+  }
+  
+  const mapDispatchToProps = (dispatch, ownProps) => {
+    const {id} = ownProps;
+    return {
+      onToggle: () => dispatch(toggleTodo(id)),
+      onRemove: () => dispatch(removeTodo(id))
+    }
+  };
+  
+  export default connect(null, mapDispatchToProps)(TodoItem);
+  
+  

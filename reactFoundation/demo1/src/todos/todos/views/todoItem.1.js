@@ -10,12 +10,11 @@ class TodoItem extends Component {
         console.log('enter TodoItem constructor: ' + this.props.text);
     }
     render() {
-        const { id, onToggle, onRemove, completed, text } = this.props;
+        const { style,id, onToggle, onRemove, completed, text } = this.props;
 
-        console.log('enter TodoItem render: ' + text);
         const checkedProp = completed ? { checked: true } : {};
         return (
-            <li className="todo-item" style={{ textDecoration: completed ? 'line-through' : 'none' }}>
+            <li className="todo-item" style={{...style, textDecoration: completed ? 'line-through' : 'none' }}>
                 <input className="toggle" type="checkbox" {...checkedProp} readOnly
                     onClick={() => onToggle(id)} />
                 <label>{text}</label>

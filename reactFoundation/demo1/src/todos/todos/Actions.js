@@ -1,6 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 
-let nextTodoId = 0;
+let nextTodoId = 4;
 
 export const addAction = (text) => ({
     type: ActionTypes.ADD_EVENT,
