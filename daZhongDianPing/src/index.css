@@ -1,0 +1,8 @@
+@import './app/static/css/common.less';
+@import './app/static/css/font.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
