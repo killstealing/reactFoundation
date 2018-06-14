@@ -1,10 +1,8 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { getListData } from '../../../fetch/home/home'
-
-import ListCompoent from '../../../components/List'
-import LoadMore from '../../../components/LoadMore'
-
+import { getListData1 } from '../../../fetch/home/home'
+import ListComponent from './../../../components/List';
+import LoadMore from '../../../components/LoadMore';
 import './style.less'
 
 class List extends React.Component {
@@ -12,11 +10,14 @@ class List extends React.Component {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            data: [],
-            hasMore: false,
-            isLoadingMore: false,
-            page: 0
+            data: [],// 存储数据，上面的代码中已经使用了
+            hasMore: false,// 记录当前状态下，是否还有更多数据，这个需要后端返回。true 即还有，false 即没了
+            isLoadingMore: false,//记录当前状态下，是否正在加载中。true 即正在加载中，false 即不是加载中状态
+            page: 0 //记录下一页的页码，首页的页码是 0
         }
+        this.loadFirstPageData=this.loadFirstPageData.bind(this);
+        this.resultHandle=this.resultHandle.bind(this);
+        this.loadMoreData=this.loadMoreData.bind(this);
     }
     render() {
         return (
@@ -24,64 +25,57 @@ class List extends React.Component {
                 <h2 className="home-list-title">猜你喜欢</h2>
                 {
                     this.state.data.length
-                    ? <ListCompoent data={this.state.data}/>
-                    : <div>{/* 加载中... */}</div>
+                    ?<ListComponent data={this.state.data}></ListComponent>
+                    :<div>加载中...</div>
                 }
                 {
                     this.state.hasMore
-                    ? <LoadMore isLoadingMore={this.state.isLoadingMore} loadMoreFn={this.loadMoreData.bind(this)}/>
+                    ? <LoadMore isLoadingMore={this.state.isLoadingMore} loadMoreFn={this.loadMoreData}/>
                     : ''
                 }
             </div>
         )
     }
     componentDidMount() {
-        // 获取首页数据
-        this.loadFirstPageData()
+        this.loadFirstPageData();
     }
-    // 获取首页数据
-    loadFirstPageData() {
-        const cityName = this.props.cityName
-        const result = getListData(cityName, 0)
-        this.resultHandle(result)
-    }
-    // 加载更多数据
-    loadMoreData() {
-        // 记录状态
+    loadFirstPageData(){
+        const cityName=this.props.cityName;
+        const result=getListData1(cityName,0);
         this.setState({
-            isLoadingMore: true
-        })
-
-        const cityName = this.props.cityName
-        const page = this.state.page
-        const result = getListData(cityName, page)
-        this.resultHandle(result)
-
-        // 增加 page 技术
-        this.setState({
-            page: page + 1,
-            isLoadingMore: false
-        })
+            page:1
+        });
+        this.resultHandle(result);
     }
-    // 处理数据
-    resultHandle(result) {
-        result.then(res => {
-            return res.json()
-        }).then(json => {
-            const hasMore = json.hasMore
-            const data = json.data
+    loadMoreData(){
+        this.setState({
+            isLoadingMore:true
+        });
+        const cityName=this.props.cityName;
+        const page=this.state.page;
+        const result=getListData1(cityName,page);
+        this.resultHandle(result);
 
+        this.setState({
+            page:page+1,
+            isLoadingMore:false
+        });
+    }
+    resultHandle(result){
+        result.then(res=>{
+            return res.json();
+        }).then(json=>{
             this.setState({
-                hasMore: hasMore,
-                // 注意，这里讲最新获取的数据，拼接到原数据之后，使用 concat 函数
-                data: this.state.data.concat(data)
-            })
+                data:this.state.data.concat(json.data),
+                hasMore:json.hasMore
+            });
         }).catch(ex => {
-            if (__DEV__) {
+            if (true) {
                 console.error('首页”猜你喜欢“获取数据报错, ', ex.message)
             }
         })
     }
+    
 }
 
 export default List

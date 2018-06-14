@@ -44,10 +44,6 @@ class App extends React.Component {
 
 // -------------------redux react 绑定--------------------
 
-function mapStateToProps(state) {
-    return {
-    }
-}
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -55,6 +51,6 @@ function mapDispatchToProps(dispatch) {
     }
 }
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(App)

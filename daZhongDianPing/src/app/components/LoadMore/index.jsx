@@ -30,7 +30,9 @@ class LoadMore extends React.Component {
         let timeoutId
         function callback() {
             const top = wrapper.getBoundingClientRect().top
+            console.log('top '+top);
             const windowHeight = window.screen.height
+            console.log('windowHeight '+windowHeight);
             if (top && top < windowHeight) {
                 // 证明 wrapper 已经被滚动到暴露在页面可视范围之内了
                 loadMoreFn()

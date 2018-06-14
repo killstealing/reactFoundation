@@ -14,7 +14,6 @@ class App extends Component {
   }
   componentDidMount() {
     let cityName = LocalStore.getItem(CITYNAME);
-    console.log(cityName);
     if (cityName == null) {
       cityName = '北京';
     }

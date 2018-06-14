@@ -1,26 +1,29 @@
 import React, { Component } from 'react'
-import HomeHeader from '../../components/Header';
 import { connect } from 'react-redux'
+import HomeHeader from '../../components/Header';
+import Category from '../../components/Category';
+import Ad from './subpage/Ad';
+import List from './subpage/List';
+
 
 class Home extends Component {
   render() {
-    console.log('userinfo '+JSON.stringify(this.props.userinfo));
     return (
       <div>
         <HomeHeader cityName={this.props.userinfo.cityName}></HomeHeader>
+        <Category></Category>
+        <Ad></Ad>
+        <List cityName={this.props.userinfo.cityName}></List>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state '+JSON.stringify(state));
   return {
     userinfo: state.userinfoReducer
   };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, null)(Home)

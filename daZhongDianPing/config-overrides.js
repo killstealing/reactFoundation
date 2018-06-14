@@ -9,7 +9,8 @@ module.exports = function override(config, env) {
         modifyVars: { "@primary-color": "#1890ff" },
     })(config, env);
     config = rewireDefinePlugin(config, env, {
-        __DEV__: true
+        __DEV__: true,
+        test:'test'
     });
     return config;
 };

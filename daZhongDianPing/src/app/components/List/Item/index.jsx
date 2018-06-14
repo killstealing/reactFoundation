@@ -1,6 +1,6 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-
+import img from '../../../static/images/list1.png';
 import './style.less'
 
 class ListItem extends React.Component {
@@ -13,7 +13,8 @@ class ListItem extends React.Component {
         return (
             <div className="list-item clear-fix">
                 <div className="item-img-container float-left">
-                    <img src={data.img} alt={data.title}/>
+                    {/* <img src={data.img} alt={data.title}/> */}
+                    <img src={img} alt={data.title}/>
                 </div>
                 <div className="item-content">
                     <div className="item-title-container clear-fix">
