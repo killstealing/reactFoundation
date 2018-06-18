@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userInfoActionsFromOtherFile from '../../actions/userinfo';
+import Header from '../../components/Header';
 
 
 class City extends Component {
   render() {
     return (
       <div>
+        <Header title="选择城市"></Header>
         <h1>{this.props.userInfo.cityName}</h1>
       </div>
     )
