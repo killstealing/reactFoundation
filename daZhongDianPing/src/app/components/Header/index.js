@@ -7,12 +7,19 @@ export default class Header extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.clickHandle=this.clickHandle.bind(this);
     }
     render() {
         return (
-            <div id="home-header" className="clear-fix">
+            <div id="common-header" className="clear-fix">
+                <span className="back-icon" onClick={this.clickHandle}>
+                    <i className="icon-chevron-left"></i>
+                </span>
                 <h1>{this.props.title} </h1>
             </div>
         )
+    }
+    clickHandle(){
+        window.history.back();
     }
 }

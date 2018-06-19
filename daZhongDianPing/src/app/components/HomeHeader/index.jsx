@@ -2,12 +2,16 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import './style.less'
 import { browserHistory, Link } from 'react-router';
+import SearchInput from '../../components/SearchInput';
 
 export default class Header extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-        this.clickCityName = this.clickCityName.bind(this);
+        this.state={
+            kwd:''
+        };
+        this.enterHandle=this.enterHandle.bind(this);
     }
     render() {
         return (
@@ -25,18 +29,15 @@ export default class Header extends React.Component {
                 <div className="home-header-middle">
                     <div className="search-container">
                         <i className="icon-search"></i>
-                        <input type="text" placeholder="请输入关键字" />
+                        <SearchInput value="" enterHandle={this.enterHandle}></SearchInput>
+                        {/* <input type="text" placeholder="请输入关键字" value={this.state.kwd} 
+                        onChange={this.handleChange} onKeyUp={this.keyUpHandle}/> */}
                     </div>
                 </div>
             </div>
         )
     }
-    clickCityName() {
-        // this.context.router.push({
-        //     pathName:'/city'
-        // });
-    }
-    clickHandle() {
-        window.history.back()
+    enterHandle(value){
+        browserHistory.push('/search/all/'+encodeURIComponent(value));
     }
 }
