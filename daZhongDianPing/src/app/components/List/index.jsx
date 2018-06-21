@@ -15,7 +15,7 @@ class List extends React.Component {
             <div className="list-container">
                 {
                     this.props.data.map((item,index)=>{
-                        return <Item key={index} data={item}></Item>
+                        return <Item key={index} data={{...item,id:index}}></Item>
                     })
                 }
             </div>

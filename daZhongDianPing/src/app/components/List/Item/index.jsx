@@ -1,7 +1,9 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import img from '../../../static/images/list1.png';
+import { Link } from 'react-router';
 import './style.less'
+
 
 class ListItem extends React.Component {
     constructor(props, context) {
@@ -9,12 +11,14 @@ class ListItem extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
-        const data = this.props.data
+        const data = this.props.data;
+        console.log('List item '+JSON.stringify(data));
         return (
+            <Link to={'/detail/'+data.id}>
             <div className="list-item clear-fix">
                 <div className="item-img-container float-left">
                     {/* <img src={data.img} alt={data.title}/> */}
-                    <img src={img} alt={data.title}/>
+                    <img src={img} alt={data.title} />
                 </div>
                 <div className="item-content">
                     <div className="item-title-container clear-fix">
@@ -30,6 +34,7 @@ class ListItem extends React.Component {
                     </div>
                 </div>
             </div>
+            </Link>
         )
     }
 }
