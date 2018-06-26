@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { getInfoData } from '../../../fetch/detail/detail';
+import DetailInfo from '../../../components/DetailInfo';
 
 export default class Info extends Component {
   constructor() {
@@ -15,7 +16,7 @@ export default class Info extends Component {
       <div>
         {
           this.state.info
-          ?'有数据了'
+          ?<DetailInfo data={this.state.info}></DetailInfo>
           :'没有数据'
         }
       </div>
@@ -27,8 +28,9 @@ export default class Info extends Component {
     result.then(res => {
       return res.json();
     }).then(json => {
-      console.log(json);
-      console.log(JSON.stringify(json));
+      this.setState({
+        info:json
+      });
     });
   }
 
