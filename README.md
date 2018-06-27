@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-[模拟大众点评](https://github.com/killstealing/reactFoundation/build/index.html)
+[模拟大众点评](https://github.com/killstealing/reactFoundation/daZhongDianPing/build/index.html)
 
 You can use the [editor on GitHub](https://github.com/killstealing/reactFoundation/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
