@@ -43,9 +43,11 @@ class Login extends Component {
 
         //跳转链接
         const params=this.props.params;
+        console.log('login '+JSON.stringify(params));
         const router=params.router;
+        const routerId=params.id;
         if(router){
-            browserHistory.push(router);
+            browserHistory.push('/'+router+'/'+routerId);
         }else{
             //跳转到默认页面---即，用户中心页 
             this.goUserPage();

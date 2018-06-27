@@ -20,6 +20,14 @@ export default class Header extends React.Component {
         )
     }
     clickHandle(){
-        window.history.back();
+        // console.log('header '+window.location);
+        // window.history.back();
+        const backRouter=this.props.backRouter;
+        if(backRouter){
+            browserHistory.push(backRouter);
+        }else{
+            window.history.back();
+        }
+        // browserHistory.goBack();
     }
 }

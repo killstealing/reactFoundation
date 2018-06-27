@@ -13,7 +13,6 @@ export default class LoginComponent extends Component {
         this.clickHandle=this.clickHandle.bind(this);
     }
     render() {
-        console.log(this.props.loginHandle);
         return (
             <div id="login-container">
                 <div className="input-container phone-container">
